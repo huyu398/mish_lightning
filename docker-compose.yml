@@ -1,0 +1,14 @@
+version: '2.4'
+services:
+  app:
+    build: .
+    shm_size: 16g
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    tty: true
+    volumes:
+      - ./configs:/workspace/configs
+      - ./src:/workspace/src
+      - ./model_trainer.py:/workspace/model_trainer.py
+    #   - ./lightning_logs:/workspace/lightning_logs

@@ -1,0 +1,11 @@
+# Trainer parameters
+max_epochs: 20
+gpus: 0
+checkpoint_callback: true
+early_stop_callback: false
+use_amp: true
+row_log_interval: 100
+log_save_interval: 500
+val_check_interval: 1.0
+
+seed: 10
