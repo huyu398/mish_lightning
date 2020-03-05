@@ -7,7 +7,7 @@ import torch
 import numpy as np
 import random
 
-#  from src.model import Model
+from src.model import Model
 
 def main(hparams):
     # initialize random seed
@@ -16,7 +16,7 @@ def main(hparams):
     np.random.seed(hparams.seed)
     random.seed(hparams.seed)
 
-    #  model = Model(hparams)
+    model = Model(hparams)
 
     trainer = Trainer(
         max_epochs          = hparams.max_epochs,
@@ -30,7 +30,7 @@ def main(hparams):
     )
     trainer.configure_checkpoint_callback()
     trainer.checkpoint_callback.save_top_k = -1
-    # trainer.fit(model)
+    trainer.fit(model)
 
 def parse_arg():
     parser = ArgumentParser(add_help=False)
