@@ -31,3 +31,4 @@ RUN wget -P ./data/MNIST/raw \
     http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz  \
     http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz
 RUN python -c "from torchvision import datasets; datasets.MNIST(root='./data', train=True, download=True)"
+RUN python -c "from torchvision import datasets; datasets.CIFAR10(root='./data', train=True, download=True)"

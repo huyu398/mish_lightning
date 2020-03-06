@@ -16,6 +16,8 @@ class Model(pl.LightningModule):
 
         if   hparams.dataset.lower() == 'mnist':
             in_ch, out_ch, fc_shape = 1, 10, (7, 7)
+        elif hparams.dataset.lower() == 'cifar10':
+            in_ch, out_ch, fc_shape = 3, 10, (8, 8)
         else:
             raise NotImplementedError(f'Unknown dataset "{self.hparams.dataset}"')
 
@@ -79,6 +81,9 @@ class Model(pl.LightningModule):
         if   self.hparams.dataset.lower() == 'mnist':
             transform = transforms.ToTensor()
             dataset = datasets.MNIST('./data', train=True, download=True, transform=transform)
+        elif self.hparams.dataset.lower() == 'cifar10':
+            transform = transforms.ToTensor()
+            dataset = datasets.CIFAR10('./data', train=True, download=True, transform=transform)
         else:
             raise NotImplementedError(f'Unknown dataset "{self.hparams.dataset}"')
 
@@ -95,6 +100,9 @@ class Model(pl.LightningModule):
         if   self.hparams.dataset.lower() == 'mnist':
             transform = transforms.ToTensor()
             dataset = datasets.MNIST('./data', train=False, download=True, transform=transform)
+        elif self.hparams.dataset.lower() == 'cifar10':
+            transform = transforms.ToTensor()
+            dataset = datasets.CIFAR10('./data', train=False, download=True, transform=transform)
         else:
             raise NotImplementedError(f'Unknown dataset "{self.hparams.dataset}"')
 
@@ -102,6 +110,6 @@ class Model(pl.LightningModule):
 
         return DataLoader(dataset,
                           batch_size=batch_size,
-                          shuffle=True,
+                          shuffle=False,
                           num_workers=4,
                           drop_last=False)
