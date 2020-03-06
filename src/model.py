@@ -14,8 +14,13 @@ class Model(pl.LightningModule):
         del hparams.config
         self.hparams = hparams
 
+        if   hparams.dataset.lower() == 'mnist':
+            in_ch, out_ch, fc_shape = 1, 10, (7, 7)
+        else:
+            raise NotImplementedError(f'Unknown dataset "{self.hparams.dataset}"')
+
         if   hparams.network.lower() == 'lenet':
-            self.network = LeNet(hparams)
+            self.network = LeNet(in_ch, out_ch, hparams.activation, fc_shape)
             self.loss = nn.NLLLoss()
         else:
             raise NotImplementedError(f'Unknown network "{hparams.network}"')
