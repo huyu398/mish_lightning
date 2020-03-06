@@ -1,6 +1,6 @@
 # Trainer parameters
 max_epochs: 20
-gpus: 0
+gpus: '0'
 checkpoint_callback: true
 early_stop_callback: false
 use_amp: true
@@ -9,3 +9,13 @@ log_save_interval: 500
 val_check_interval: 1.0
 
 seed: 10
+
+# Model parameters
+network: LeNet
+activation: mish
+
+optimizer: SGD
+learning_rate: 0.01
+
+dataset: MNIST
+batch_size: 128
