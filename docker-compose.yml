@@ -11,4 +11,11 @@ services:
       - ./configs:/workspace/configs
       - ./src:/workspace/src
       - ./model_trainer.py:/workspace/model_trainer.py
-    #   - ./lightning_logs:/workspace/lightning_logs
+      - ./lightning_logs:/workspace/lightning_logs
+  tensorboard:
+    build: .
+    ports:
+      - 6006:6006
+    volumes:
+      - ./lightning_logs:/lightning_logs
+    entrypoint: tensorboard --logdir /lightning_logs --bind_all
